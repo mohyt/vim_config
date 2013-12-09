@@ -121,16 +121,12 @@ nnoremap <Tab> %
 vnoremap <Tab> %
 "Pull word under cursor into LHS of a substitute (for quick search and replace)
 nnoremap <leader>z :%s#\<<C-r>=expand("<cword>")<CR>\>#
-"Keep search matches in the middle of the window and pulse the line when moving to them.
-nnoremap n n:call PulseCursorLine()<cr>
-nnoremap N N:call PulseCursorLine()<cr>
+
 
 " NERDTree settings {{{
 "Put focus to the NERD Tree with F3 (tricked by quickly closing it and
 "immediately showing it again, since there is no :NERDTreeFocus command)
-nnoremap <leader>n :NERDTreeClose<CR>:NERDTreeToggle<CR>
-nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
-nnoremap <leader>N :NERDTreeClose<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
 "
 " Store the bookmarks file
 let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
@@ -155,8 +151,8 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$','\.o$', '\.so$
 "}}}
 
 " TagList settings {{{
-nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
-nnoremap <leader>L :TlistClose<CR>
+nnoremap <F3> :TlistToggle<CR>
+
 
 " quit Vim when the TagList window is the last open window
 let Tlist_Exit_OnlyWindow=1         " quit when TagList is the last open window
@@ -200,16 +196,6 @@ nnoremap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 " Filetype specific handling {{{
 " only do this part when compiled with support for autocommands
 if has("autocmd")
-    augroup invisible_chars "{{{
-        au!
-
-        " Show invisible characters in all of these files
-        autocmd filetype vim setlocal list
-        autocmd filetype python,rst setlocal list
-        autocmd filetype ruby setlocal list
-        autocmd filetype javascript,css setlocal list
-    augroup end "}}}
-	
 	augroup vim_files "{{{
         au!
 
@@ -218,7 +204,7 @@ if has("autocmd")
         autocmd filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
         autocmd filetype vim noremap! <buffer> <F1> <Esc>:help <C-r><C-w><CR>
     augroup end "}}}
-	
+
 	augroup python_files "{{{
         au!
 
@@ -266,14 +252,10 @@ if has("autocmd")
     augroup end " }}}
 endif
 "}}}
-	
+
 " Python mode configuration ----------------------------------------------- {{{
 " Don't run pylint on every save
 let g:pymode_lint = 0
 let g:pymode_lint_write = 0
 let g:pymode_breakpoint_key = '<leader>B'
 " }}}
-
-
-
-
